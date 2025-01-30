@@ -13,7 +13,7 @@ class Bid with _$Bid {
     required String objectPlace,
     required String createdDate,
     required String finishedDate,
-    @Default([])List<String> taskList,
+    required String taskList,
   }) = _Bid;
 
   factory Bid.fromJson(Map<String, Object?> json)

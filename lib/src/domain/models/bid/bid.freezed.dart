@@ -26,7 +26,7 @@ mixin _$Bid {
   String get objectPlace => throw _privateConstructorUsedError;
   String get createdDate => throw _privateConstructorUsedError;
   String get finishedDate => throw _privateConstructorUsedError;
-  List<String> get taskList => throw _privateConstructorUsedError;
+  String get taskList => throw _privateConstructorUsedError;
 
   /// Serializes this Bid to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $BidCopyWith<$Res> {
       String objectPlace,
       String createdDate,
       String finishedDate,
-      List<String> taskList});
+      String taskList});
 }
 
 /// @nodoc
@@ -102,7 +102,7 @@ class _$BidCopyWithImpl<$Res, $Val extends Bid> implements $BidCopyWith<$Res> {
       taskList: null == taskList
           ? _value.taskList
           : taskList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as String,
     ) as $Val);
   }
 }
@@ -120,7 +120,7 @@ abstract class _$$BidImplCopyWith<$Res> implements $BidCopyWith<$Res> {
       String objectPlace,
       String createdDate,
       String finishedDate,
-      List<String> taskList});
+      String taskList});
 }
 
 /// @nodoc
@@ -168,9 +168,9 @@ class __$$BidImplCopyWithImpl<$Res> extends _$BidCopyWithImpl<$Res, _$BidImpl>
           : finishedDate // ignore: cast_nullable_to_non_nullable
               as String,
       taskList: null == taskList
-          ? _value._taskList
+          ? _value.taskList
           : taskList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as String,
     ));
   }
 }
@@ -185,8 +185,7 @@ class _$BidImpl with DiagnosticableTreeMixin implements _Bid {
       required this.objectPlace,
       required this.createdDate,
       required this.finishedDate,
-      final List<String> taskList = const []})
-      : _taskList = taskList;
+      required this.taskList});
 
   factory _$BidImpl.fromJson(Map<String, dynamic> json) =>
       _$$BidImplFromJson(json);
@@ -203,14 +202,8 @@ class _$BidImpl with DiagnosticableTreeMixin implements _Bid {
   final String createdDate;
   @override
   final String finishedDate;
-  final List<String> _taskList;
   @override
-  @JsonKey()
-  List<String> get taskList {
-    if (_taskList is EqualUnmodifiableListView) return _taskList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_taskList);
-  }
+  final String taskList;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -246,20 +239,14 @@ class _$BidImpl with DiagnosticableTreeMixin implements _Bid {
                 other.createdDate == createdDate) &&
             (identical(other.finishedDate, finishedDate) ||
                 other.finishedDate == finishedDate) &&
-            const DeepCollectionEquality().equals(other._taskList, _taskList));
+            (identical(other.taskList, taskList) ||
+                other.taskList == taskList));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      state,
-      objectName,
-      objectPlace,
-      createdDate,
-      finishedDate,
-      const DeepCollectionEquality().hash(_taskList));
+  int get hashCode => Object.hash(runtimeType, id, state, objectName,
+      objectPlace, createdDate, finishedDate, taskList);
 
   /// Create a copy of Bid
   /// with the given fields replaced by the non-null parameter values.
@@ -285,7 +272,7 @@ abstract class _Bid implements Bid {
       required final String objectPlace,
       required final String createdDate,
       required final String finishedDate,
-      final List<String> taskList}) = _$BidImpl;
+      required final String taskList}) = _$BidImpl;
 
   factory _Bid.fromJson(Map<String, dynamic> json) = _$BidImpl.fromJson;
 
@@ -302,7 +289,7 @@ abstract class _Bid implements Bid {
   @override
   String get finishedDate;
   @override
-  List<String> get taskList;
+  String get taskList;
 
   /// Create a copy of Bid
   /// with the given fields replaced by the non-null parameter values.

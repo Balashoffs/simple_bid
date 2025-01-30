@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 List<String> weekDays = [
   'Пн',
   'Вт',
@@ -17,3 +19,8 @@ List<String> weekDaysFull = [
   'Суббота',
   'Воскресенье',
 ];
+
+String dateTimeNow(){
+  DateTime now = DateTime.now();
+  return DateFormat('yyyy-MM-dd – kk:mm').format(now);
+}

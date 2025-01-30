@@ -42,8 +42,7 @@ class BidRepository extends Repository<List<Bid>> with StateMixin {
         );
   }
 
-  void update(Bid newBid) async {
-    setLoadingState();
+  void update(Bid newBid, Function func ) async {
     _bidClient.updateBid(newBid).then(
           (successOrFailure) => successOrFailure.fold(
             (failure) {
@@ -52,7 +51,7 @@ class BidRepository extends Repository<List<Bid>> with StateMixin {
           setFailureState(failure);
         },
             (bids) {
-          emit(SuccessState([]));
+          func();
         },
       ),
     );

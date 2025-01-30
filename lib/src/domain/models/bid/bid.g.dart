@@ -13,10 +13,7 @@ _$BidImpl _$$BidImplFromJson(Map<String, dynamic> json) => _$BidImpl(
       objectPlace: json['objectPlace'] as String,
       createdDate: json['createdDate'] as String,
       finishedDate: json['finishedDate'] as String,
-      taskList: (json['taskList'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          const [],
+      taskList: json['taskList'] as String,
     );
 
 Map<String, dynamic> _$$BidImplToJson(_$BidImpl instance) => <String, dynamic>{

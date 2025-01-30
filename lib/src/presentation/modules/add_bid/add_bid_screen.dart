@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:simple_bid/src/data/common/utils/date_utils.dart';
 import 'package:simple_bid/src/domain/models/bid/bid.dart';
 import 'package:simple_bid/src/presentation/bloc/bid_repository.dart';
 import 'package:sm_modules/sm_ui_kit.dart';
+
+import 'custom_date_picker.dart';
 
 class AddBidScreen extends StatelessWidget {
   const AddBidScreen({super.key});
@@ -34,43 +37,75 @@ class AddBidWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int id = DateTime.now().millisecondsSinceEpoch;
-
+    String dateTime = dateTimeNow();
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
-        child: Center(
-            child: Column(
+        child: ListView(
+          shrinkWrap: true,
+          primary: true,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: AppTextField(
-                labelText: 'Номер заявки',
-                initialValue: '${id}',
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: AppElevatedButton(
-                text: "Создать",
-                onTap: () {
-                  Bid bid = Bid(
-                    state: 'Created',
-                    objectPlace: 'Room',
-                    objectName: 'Stage',
-                    finishedDate: '10.10.2020',
-                    createdDate: '10.10.2019',
-                    id: '${id}',
-                    taskList: [],
-                  );
-                  _getRepository(context).add(
-                      bid,
-                      () => Navigator.pushNamedAndRemoveUntil(
-                          context, '/', (_) => false));
-                },
-              ),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: AppTextField(
+                    labelText: 'Номер заявки',
+                    initialValue: '${id}',
+                    enabled: false,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: AppTextField(
+                    labelText: 'Объект',
+                    helperText: 'Фанкойл 3.2',
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: AppTextField(
+                    labelText: 'Место расположения',
+                    helperText: 'Комната 1.2',
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: AppTextField(
+                    multiline: true,
+                    labelText: 'Описание задачи',
+                    helperText: 'Заменить датчик давления ',
+                  ),
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: buildCalendarDialogButton(context)
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: AppElevatedButton(
+                    text: "Создать",
+                    onTap: () {
+                      Bid bid = Bid(
+                        state: 'Создано',
+                        objectPlace: 'Команата',
+                        objectName: 'Фанкойли',
+                        finishedDate: '10.10.2020',
+                        createdDate: '10.10.2019',
+                        id: '${id}',
+                        taskList: 'Заменить датчик давления',
+                      );
+                      _getRepository(context).add(
+                          bid,
+                              () => Navigator.pushNamedAndRemoveUntil(
+                              context, '/', (_) => false));
+                    },
+                  ),
+                )
+              ],
             )
           ],
-        )),
+        ),
       ),
     );
   }
@@ -78,7 +113,6 @@ class AddBidWidget extends StatelessWidget {
   static BidRepository _getRepository(BuildContext context) =>
       BlocProvider.of<BidRepository>(context);
 
-  List<Widget> _generaterateWidgets() {
-    return [];
-  }
 }
+
+
