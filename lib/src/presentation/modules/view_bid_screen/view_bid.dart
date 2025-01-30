@@ -15,8 +15,11 @@ class ViewBidScreen extends StatelessWidget {
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text("Bid #${bid.id}", style: AT.t.h2.white(context),
-          textAlign: TextAlign.start,),
+        title: Text(
+          "Bid #${bid.id}",
+          style: AT.t.h2.white(context),
+          textAlign: TextAlign.start,
+        ),
         centerTitle: true,
       ),
       body: ViewBidWidget(bid: bid),
@@ -32,13 +35,17 @@ class ViewBidWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Center(
-        child: Text("BID VIEW #${bid.id}"),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: AppTextField(
+            initialValue: bid.id,
+            labelText: "№ Заявки",
+            onSubmit: null,
+            enabled: false,
+          ),
+        ),
       ),
     );
-  }
-
-  List<Widget> _generaterateWidgets(Bid bid) {
-    return [];
   }
 }

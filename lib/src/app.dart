@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,18 +49,28 @@ class BidViewer extends App {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeCubit, ThemeState>(
-      bloc: di.themeBloc,
-      builder: (BuildContext context, themeState) => MaterialApp(
-        initialRoute: '/',
-        routes: {
-          '/': (context) => MainBidsScreen(),
-          '/addBid': (context) => AddBidScreen(),
-          '/viewBid': (context) => ViewBidScreen(),
-        },
-        title: 'BIDs',
-        themeMode: themeState.themeMode,
-        theme: AppThemes.lightThemeMobile(),
+    final botToastBuilder = BotToastInit();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(value: di.bidRepository),
+      ],
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        bloc: di.themeBloc,
+        builder: (BuildContext context, themeState) => MaterialApp(
+          initialRoute: '/',
+          routes: {
+            '/': (context) => MainBidsScreen(),
+            '/addBid': (context) => AddBidScreen(),
+            '/viewBid': (context) => ViewBidScreen(),
+          },
+          title: 'BIDs',
+          themeMode: themeState.themeMode,
+          theme: AppThemes.lightThemeMobile(),
+          builder: (context, child) {
+            child = botToastBuilder(context, child);
+            return child;
+          },
+        ),
       ),
     );
   }

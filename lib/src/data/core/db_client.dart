@@ -1,8 +1,9 @@
-import 'exceptions.dart';
-import 'json_converter.dart';
+import 'dart:async';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:async';
+
+import 'exceptions.dart';
+import 'json_converter.dart';
 
 class DBConstants {
   const DBConstants._();
@@ -14,7 +15,10 @@ abstract class DBClient {
   const DBClient();
 
   T read<T>(String key);
+
   Future<void> write(String key, Object value);
+
+  Future<bool> isPresent(String key);
 }
 
 class DBClientImpl with JsonConverter implements DBClient {
@@ -52,5 +56,10 @@ class DBClientImpl with JsonConverter implements DBClient {
     } catch (e) {
       throw DataBaseException(e.toString());
     }
+  }
+
+  @override
+  Future<bool> isPresent(String key) async {
+    return _preferences.containsKey(key);
   }
 }

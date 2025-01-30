@@ -4,7 +4,6 @@ mixin JsonConverter {
   String encodeToJsonString(Object? value) {
     if (value == null) return '';
     if (value is String) return value;
-
     try {
       return json.encode(value);
     } catch (_) {
