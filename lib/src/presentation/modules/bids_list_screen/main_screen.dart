@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_bid/src/domain/models/bid/bid.dart';
+import 'package:sm_modules/sm_ui_kit.dart';
 
 class MainBidsScreen extends StatelessWidget {
   const MainBidsScreen({super.key});
@@ -8,13 +9,17 @@ class MainBidsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(82, 170, 94, 1.0),
-        title: Text("List of BIDs"),
+        backgroundColor: Colors.deepPurple,
+        title: Text(
+          "List of BIDs",
+          style: AT.t.h2.white(context),
+          textAlign: TextAlign.start,
+        ),
         centerTitle: true,
       ),
       body: BidListWidget(),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromRGBO(82, 170, 94, 1.0),
+        backgroundColor: Colors.deepPurple,
         tooltip: 'Add Bid',
         onPressed: () {
           Navigator.pushNamed(context, '/addBid');
@@ -39,13 +44,11 @@ class BidListWidget extends StatelessWidget {
         state: "",
         taskList: []);
     return Center(
-      child: TextButton(onPressed: () {
-        Navigator.pushNamed(
-          context,
-          '/viewBid',
-          arguments: bid
-        );
-      }, child: Text(bid.id)),
+      child: TextButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/viewBid', arguments: bid);
+          },
+          child: Text(bid.id)),
     );
   }
 }

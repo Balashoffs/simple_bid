@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_bid/src/domain/models/bid/bid.dart';
+import 'package:sm_modules/sm_ui_kit.dart';
 
 class ViewBidScreen extends StatelessWidget {
   const ViewBidScreen({super.key});
@@ -9,12 +10,13 @@ class ViewBidScreen extends StatelessWidget {
     final bid = ModalRoute.of(context)!.settings.arguments as Bid;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(82, 170, 94, 1.0),
+        backgroundColor: Colors.deepPurple,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text("Bid #${bid.id}"),
+        title: Text("Bid #${bid.id}", style: AT.t.h2.white(context),
+          textAlign: TextAlign.start,),
         centerTitle: true,
       ),
       body: ViewBidWidget(bid: bid),
