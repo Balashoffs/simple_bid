@@ -94,28 +94,6 @@ class _BidListWidgetState extends State<BidListWidget> {
               },
             ),
           );
-          // return Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          //   child: DecoratedBox(
-          //     decoration: BoxDecoration(
-          //       border: Border.all(),
-          //       borderRadius: BorderRadius.circular(4),
-          //     ),
-          //     child: Flexible(
-          //       // flex: 4,
-          //       fit: FlexFit.tight,
-          //       child: Padding(
-          //         padding:
-          //             const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-          //         child: Text(
-          //
-          //           style: AT.t.h2,
-          //           textAlign: TextAlign.start,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // );
         },
       ),
     );
